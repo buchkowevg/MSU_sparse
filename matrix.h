@@ -19,20 +19,20 @@ class Matrix
 public:
     Matrix();
     Matrix(const Matrix&);
-    Matrix(Vector, bool = 0);
-    Matrix(unsigned int, Rational_number = 0, bool = 0);
-    Matrix(unsigned int, unsigned int, Rational_number = 0);
+    Matrix(const Vector&, bool = 0);
+    Matrix(unsigned int, const Rational_number& = 0, bool = 0);
+    Matrix(unsigned int, unsigned int,const Rational_number& = 0);
     Matrix(const char*);
     ~Matrix();
     Matrix& operator =(const Matrix&);
     Matrix operator -() const;
     Matrix operator ~() const;
     Matrix operator ^(unsigned int) const;
-    friend Vector operator * (const Matrix, const Vector);
-    friend Matrix operator + (const Matrix, const Matrix);
-    friend Matrix operator - (const Matrix, const Matrix);
-    friend Matrix operator * (const Matrix, const Matrix);
-    friend char* to_string(const Matrix);
+    friend Vector operator * (const Matrix&, const Vector&);
+    friend Matrix operator + (const Matrix&, const Matrix&);
+    friend Matrix operator - (const Matrix&, const Matrix&);
+    friend Matrix operator * (const Matrix&, const Matrix&);
+    friend char* to_string(const Matrix&);
     Rational_number operator [](Matrix_coord) const;
     Rational_number& operator() (unsigned int, unsigned int);
     Rational_number& operator() (Matrix_coord);
@@ -42,8 +42,8 @@ public:
     Vector get_column(unsigned int) const;
     Vector get_row(unsigned int) const;
     void write(const char*) const;
-    Matrix insert_row(Vector, unsigned int);
-    Matrix insert_column(Vector, unsigned int);
+    Matrix insert_row(const Vector&, unsigned int);
+    Matrix insert_column(const Vector&, unsigned int);
 private:
     unsigned int length_x;
     unsigned int length_y;

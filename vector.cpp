@@ -375,7 +375,7 @@ Rational_number Vector::operator [](unsigned int key) const
     }
     return get_elem(tree, key);
 }
-Vector operator +(Vector obj1, Vector obj2)
+Vector operator +(const Vector& obj1, const Vector& obj2)
 {
     Vector res(obj1.get_number_of_elements());
     Rational_number rat1, rat2;
@@ -422,11 +422,11 @@ Vector Vector::operator -() const
     }
     return res;
 }
-Vector operator -(Vector obj1, Vector obj2)
+Vector operator -(const Vector& obj1, const Vector& obj2)
 {
     return obj1 + (-obj2);
 }
-Rational_number operator *(Vector obj1, Vector obj2)
+Rational_number operator *(const Vector& obj1, const Vector& obj2)
 {
     Rational_number res = 0;
     if(obj1.get_number_of_elements() != obj2.get_number_of_elements())
@@ -441,15 +441,15 @@ Rational_number operator *(Vector obj1, Vector obj2)
     }
     return res;
 }
-Vector operator +(Vector obj1, Rational_number obj2)
+Vector operator +(const Vector& obj1, Rational_number obj2)
 {
     return obj1 + Vector(obj1.get_number_of_elements(), obj2);
 }
-Vector operator -(Vector obj1, Rational_number obj2)
+Vector operator -(const Vector& obj1, Rational_number obj2)
 {
     return obj1 - Vector(obj1.get_number_of_elements(), obj2);
 }
-Vector operator *(Vector obj1, Rational_number obj2)
+Vector operator *(const Vector& obj1, Rational_number obj2)
 {
     Vector res(obj1.get_number_of_elements());
     if(obj2 == 0) return res;
@@ -488,19 +488,19 @@ Vector operator /(Vector obj1, Rational_number obj2)
     }
     return res;
 }
-Vector operator +(const Rational_number obj1, const Vector obj2)
+Vector operator +(const Rational_number obj1, const Vector& obj2)
 {
     return obj2 + obj1;
 }
-Vector operator -(const Rational_number obj1, const Vector obj2)
+Vector operator -(const Rational_number obj1, const Vector& obj2)
 {
     return (-obj2) + obj1;
 }
-Vector operator *(const Rational_number obj1, const Vector obj2)
+Vector operator *(const Rational_number obj1, const Vector& obj2)
 {
     return obj2 * obj1;
 }
-Vector operator /(const Rational_number obj1, const Vector obj2)
+Vector operator /(const Rational_number obj1, const Vector& obj2)
 {
     Vector res(obj2.get_number_of_elements());
     Rational_number r;

@@ -53,7 +53,7 @@ Matrix::Matrix(const Matrix &obj)
         }
     }
 }
-Matrix::Matrix(unsigned int length, Rational_number rat, bool flag)
+Matrix::Matrix(unsigned int length,const  Rational_number& rat, bool flag)
 {
     length_x = length_y = length;
     tree = 0;
@@ -81,7 +81,7 @@ Matrix::Matrix(unsigned int length, Rational_number rat, bool flag)
         throw Matrix_ex(M_ALLOC_ERR);
     }
 }
-Matrix::Matrix(unsigned int x, unsigned int y, Rational_number rat)
+Matrix::Matrix(unsigned int x, unsigned int y,const  Rational_number& rat)
 {
     length_x = x;
     length_y = y;
@@ -103,7 +103,7 @@ Matrix::Matrix(unsigned int x, unsigned int y, Rational_number rat)
         throw Matrix_ex(M_ALLOC_ERR);
     }
 }
-Matrix::Matrix(Vector obj, bool flag)
+Matrix::Matrix(const Vector &obj, bool flag)
 {
     tree = 0;
     try
@@ -461,7 +461,7 @@ Vector Matrix::get_row(unsigned int row) const
     }
     return res;
 }
-Matrix Matrix::insert_row(Vector obj, unsigned int row)
+Matrix Matrix::insert_row(const Vector& obj, unsigned int row)
 {
     if(length_x <= row) throw Matrix_ex(M_OUT_OF_RANGE, this);
     if(length_y != obj.get_number_of_elements()) throw Matrix_ex(M_BAD_SIZES, this);;
@@ -481,7 +481,7 @@ Matrix Matrix::insert_row(Vector obj, unsigned int row)
     }
     return *this;
 }
-Matrix Matrix::insert_column(Vector obj, unsigned int column)
+Matrix Matrix::insert_column(const Vector& obj, unsigned int column)
 {
     if(length_y <= column) throw Matrix_ex(M_OUT_OF_RANGE, this);
     if(length_x != obj.get_number_of_elements()) throw Matrix_ex(M_BAD_SIZES, this);;
@@ -638,7 +638,7 @@ Vector operator *(const Matrix arg1, const Vector arg2)
 
     return res;
 }
-Matrix operator +(const Matrix arg1, const Matrix arg2)
+Matrix operator +(const Matrix& arg1, const Matrix& arg2)
 {
     if((arg1.get_length_x() != arg2.get_length_x()) ||
             (arg1.get_length_y() != arg2.get_length_y()))
@@ -662,11 +662,11 @@ Matrix operator +(const Matrix arg1, const Matrix arg2)
     }
     return res;
 }
-Matrix operator -(const Matrix arg1, const Matrix arg2)
+Matrix operator -(const Matrix& arg1, const Matrix& arg2)
 {
     return arg1 + (- arg2);
 }
-Matrix operator *(const Matrix arg1, const Matrix arg2)
+Matrix operator *(const Matrix& arg1, const Matrix& arg2)
 {
     if(arg1.get_length_y() != arg2.get_length_x()) throw Matrix_ex(M_BAD_SIZES, &arg1, &arg2);
     Matrix mat(arg1.get_length_x(), arg2.get_length_y());
@@ -694,7 +694,7 @@ Matrix operator *(const Matrix arg1, const Matrix arg2)
     return mat;
 
 }
-char* to_string(const Matrix obj)
+char* to_string(const Matrix& obj)
 {
     return obj.get_str();
 }

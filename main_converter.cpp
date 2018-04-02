@@ -23,17 +23,19 @@ int main(int argc, char** argv)
         if(flag == 0)
         {
             Matrix mat(argv[2]);
-            double dub[mat.get_length_x()][mat.get_length_y()];
-            for(unsigned int i = 0; i < mat.get_length_x(); i++)
-                for(unsigned int j = 0; j < mat.get_length_y(); j++)
-                    dub[i][j] = mat[Matrix_coord(i, j)].get_double();
             ofstream OutFile;
-            OutFile.open(argv[3], ios::out | ios::binary);
             unsigned int x = mat.get_length_x();
             unsigned int y = mat.get_length_y();
+            double dub;
+            OutFile.open(argv[3], ios::out | ios::binary);
             OutFile.write( (char*)(&x), sizeof(unsigned int));
-            OutFile.write( (char*)(&y), sizeof(unsigned int));
-            OutFile.write( (char*)dub, sizeof(double) * mat.get_length_y() * mat.get_length_x());
+            OutFile.write( (char*)(&y), sizeof(unsigned int));            
+            for(unsigned int i = 0; i < mat.get_length_x(); i++)
+                for(unsigned int j = 0; j < mat.get_length_y(); j++)
+                {
+                	dub = mat[Matrix_coord(i ,j)].get_double();
+            		OutFile.write( (char*)(&dub), sizeof(double));
+                }
             OutFile.close();
             cout << "Done" << endl;
             return 0;
@@ -43,33 +45,39 @@ int main(int argc, char** argv)
             unsigned int x;
             unsigned int y;
             unsigned int power;
+            unsigned int respower = 1;
+            double dub;
             Rational_number rat;
             if(argc < 5)
             {
                 cout << "Not enough arguments" << endl;
                 return 0;
             }
-            power = 10^atoi(argv[4]);
+            power = atoi(argv[4]);
+            for(unsigned int i = 0; i < power; i++)
+            {
+            	respower *= 10;
+            }
             ifstream InFile;
             InFile.open(argv[2], ios::binary);
             InFile.read(reinterpret_cast<char*>(&x), sizeof(unsigned int));
             InFile.read(reinterpret_cast<char*>(&y), sizeof(unsigned int));
-            double dub[x][y];
-            InFile.read(reinterpret_cast<char*>(&dub), sizeof(double) * x* y);
             Matrix mat(x,y);
             for(unsigned int i = 0; i < mat.get_length_x(); i++)
                 for(unsigned int j = 0; j < mat.get_length_y(); j++)
                 {
-                    if(dub[i][j] != 0)
+            		InFile.read(reinterpret_cast<char*>(&dub), sizeof(double));
+                    if(dub != 0)
                     {
-                        rat = (long int)(dub[i][j] * power);
-                        rat /= power;
+                        rat = (long int)(dub * respower);
+                        rat /= respower;
                         rat.make_canonical();
                         mat(i ,j) = rat;
                     }
                 }
             mat.write(argv[3]);
             cout << "Done" << endl;
+            return 0;
         }
 
     }

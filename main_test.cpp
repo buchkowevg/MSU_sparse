@@ -12,14 +12,8 @@ int main(int argc, char** argv)
 {
     try
     {
-        if(argc != 3)
-        {
-            cout << "number of arguments != 2" << endl;
-            return 0;
-        }
-        Matrix mat1(argv[2]);
-        Matrix mat2(argv[3]);
-        char* s = to_string(mat1 * mat2);
+        Matrix mat1(4, Rational_number(11), 1);
+        char* s = to_string(mat1^2);
         cout << s << endl;
         free(s);
     }
