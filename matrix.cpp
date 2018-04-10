@@ -116,7 +116,7 @@ Matrix::Matrix(const Vector &obj, bool flag)
             {
                 for(unsigned int j = 0; j < length_y; j++)
                 {
-                    if(obj[i] != 0) tree = insert(tree, Matrix_coord(j, i), obj[i]);
+                    if(obj[i] != 0) tree = insert(tree, Matrix_coord(i, j), obj[i]);
                 }
             }
         }
@@ -128,7 +128,7 @@ Matrix::Matrix(const Vector &obj, bool flag)
             {
                 for(unsigned int j = 0; j < length_y; j++)
                 {
-                    if(obj[j] != 0) tree = insert(tree, Matrix_coord(j, i), obj[j]);
+                    if(obj[j] != 0) tree = insert(tree, Matrix_coord(i, j), obj[j]);
                 }
             }
         }
@@ -507,6 +507,10 @@ Rational_number Matrix::operator [](Matrix_coord coord) const
         throw Matrix_ex(M_OUT_OF_RANGE, this);
     return get_elem(tree, coord);
 }
+Vector Matrix::operator [](unsigned int i) const
+{
+    return get_column(i);
+}
 Rational_number& Matrix::operator ()(Matrix_coord coord)
 {
     if(coord.get_x() >= length_x || coord.get_y() >= length_y)
@@ -612,7 +616,7 @@ Matrix Matrix::operator ^(unsigned int power) const
         throw Matrix_ex(M_ALLOC_ERR);
     }
 }
-Vector operator *(const Matrix arg1, const Vector arg2)
+Vector operator *(const Matrix& arg1, const Vector& arg2)
 {
     if(arg1.get_length_y() != arg2.get_number_of_elements()) throw Matrix_ex(M_BAD_SIZES, &arg1);
     Vector res(arg1.get_length_x());

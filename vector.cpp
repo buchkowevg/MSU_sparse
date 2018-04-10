@@ -521,7 +521,7 @@ Vector operator /(const Rational_number obj1, const Vector& obj2)
     }
     return res;
 }
-char* to_string(Vector obj1)
+char* to_string(const Vector &obj1)
 {
     return obj1.get_str();
 }

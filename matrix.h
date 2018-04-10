@@ -13,7 +13,6 @@ struct mnode // структура для представления узлов 
     mnode(Matrix_coord k, Rational_number d)
     { key = k; left = right = 0; height = 1; data = d;}
 };
-
 class Matrix
 {
 public:
@@ -33,6 +32,7 @@ public:
     friend Matrix operator - (const Matrix&, const Matrix&);
     friend Matrix operator * (const Matrix&, const Matrix&);
     friend char* to_string(const Matrix&);
+    Vector operator [](unsigned int) const;
     Rational_number operator [](Matrix_coord) const;
     Rational_number& operator() (unsigned int, unsigned int);
     Rational_number& operator() (Matrix_coord);

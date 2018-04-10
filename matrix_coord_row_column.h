@@ -24,5 +24,6 @@ private:
     unsigned int coord_index;
     Matrix* mat;
 };
+
 #endif // MATRIX_COORD_ROW_COLUMN
 

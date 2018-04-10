@@ -12,10 +12,27 @@ int main(int argc, char** argv)
 {
     try
     {
-        Matrix mat1(4, Rational_number(11), 1);
-        char* s = to_string(mat1^2);
-        cout << s << endl;
-        free(s);
+        Vector vec(3);
+
+        Rational_number rat = "3/27";
+        Rational_number rat1 = "1/3";
+        vec(0) = "1/2";
+        vec(1) = "1/4";
+        vec(2) = "1/16";
+        Vector vec1(2);
+        vec1(0) = "1";
+        vec1(1) = "2";
+        Matrix mat1(2);
+        Matrix mat2(3);
+        mat1(0,0) = "3";
+        mat1(0,1) = "1";
+        mat1(1,0) = "4";
+        mat1(1,1) ="2";
+        mat1 = mat1 * vec1;
+        //Rational_number
+        cout <<to_string(mat1) <<endl;
+        //rat = rat / 0;
+        //free(s);
     }
     catch(const Rational_number_ex ex)
     {

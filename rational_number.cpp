@@ -227,7 +227,7 @@ void Rational_number::set(const char* str)
         }
         while(count < s.getlength() && s[count] == ' ') count++;
         if(count != s.getlength()) throw Rational_number_ex(R_BAD_STRING_FORMAT,0,0,s._getchararr());
-        if(denuminator == 0) throw Rational_number(6);
+        if(denuminator == 0) throw Rational_number_ex(R_ZERO_DIV_CONSTRUCT);
     }
     catch(const char*)
     {
