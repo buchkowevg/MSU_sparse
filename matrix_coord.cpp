@@ -1,6 +1,7 @@
 #include "matrix_coord_row_column.h"
 Matrix_column_coord::Matrix_column_coord(Matrix* m, unsigned int c)
 {
+    mat = m;
     coord_index = c;
     column = m->get_column(c);
 }
@@ -15,6 +16,7 @@ void Matrix_column_coord::sync_from()
 
 Matrix_row_coord::Matrix_row_coord(Matrix* m, unsigned int c)
 {
+    mat = m;
     coord_index = c;
     row = m->get_row(c);
 }

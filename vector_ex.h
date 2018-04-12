@@ -11,9 +11,11 @@
 #define V_OUT_OF_RANGE 8
 #define V_BAD_SIZES 9
 #include "vector.h"
-class Vector_ex
+#include "sparse_ex.h"
+class Vector_ex : public Sparse_ex
 {
 public:
+    Vector_ex() {}
     Vector_ex(unsigned int c, const Vector *vec1 = 0, const Vector *vec2 = 0, const char* m = "");
     const char * what () const;
     const Vector *obj1;

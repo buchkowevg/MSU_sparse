@@ -15,6 +15,22 @@ struct mnode // структура для представления узлов 
 };
 class Matrix
 {
+    class Matrix_support
+    {
+        public:
+            Matrix_support(const Matrix *m, unsigned int coord)
+            {
+                mat = m;
+                i = coord;
+            }
+            Rational_number operator[](unsigned int j) const
+            {
+                 return mat->operator [](Matrix_coord(i,j));
+            }
+        private:
+            unsigned int i;
+            const Matrix *mat;
+    };
 public:
     Matrix();
     Matrix(const Matrix&);
@@ -32,7 +48,10 @@ public:
     friend Matrix operator - (const Matrix&, const Matrix&);
     friend Matrix operator * (const Matrix&, const Matrix&);
     friend char* to_string(const Matrix&);
-    Vector operator [](unsigned int) const;
+    Matrix_support operator [](unsigned int i) const
+    {
+        return Matrix_support(this, i);
+    }
     Rational_number operator [](Matrix_coord) const;
     Rational_number& operator() (unsigned int, unsigned int);
     Rational_number& operator() (Matrix_coord);
@@ -64,5 +83,6 @@ private:
     mnode* remove(mnode* p, Matrix_coord k);
     mnode* remove(mnode* p);
 };
+
 
 #endif // MATRIX_H

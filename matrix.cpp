@@ -23,6 +23,7 @@ using namespace std;
 #define READING_KEY2 11
 #define WAITING_FOR_DATA 9
 #define READING_DATA 10
+
 Matrix::Matrix()
 {
     length_x = 0;
@@ -506,10 +507,6 @@ Rational_number Matrix::operator [](Matrix_coord coord) const
     if(coord.get_x() >= length_x || coord.get_y() >= length_y)
         throw Matrix_ex(M_OUT_OF_RANGE, this);
     return get_elem(tree, coord);
-}
-Vector Matrix::operator [](unsigned int i) const
-{
-    return get_column(i);
 }
 Rational_number& Matrix::operator ()(Matrix_coord coord)
 {
