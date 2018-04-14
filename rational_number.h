@@ -2,6 +2,7 @@
 #define RATIONAL_NUMBER_H
 #include <inttypes.h>
 #include "mystring.h"
+#include <ostream>
 
 class Rational_number
 {
@@ -40,6 +41,7 @@ public:
     friend bool operator <= (const Rational_number arg1, const Rational_number arg2);
     friend bool operator == (const Rational_number arg1, const Rational_number arg2);
     friend bool operator != (const Rational_number arg1, const Rational_number arg2);
+    friend std::ostream& operator << (std::ostream&, Rational_number);
     friend char* to_string(const Rational_number obj);
     friend Rational_number floor(const Rational_number obj);
     friend Rational_number round(const Rational_number obj);

@@ -669,5 +669,12 @@ node* Vector::remove(node *p)
     delete p;
     return NULL;
 }
+std::ostream& operator << (std::ostream& s, const Vector &v)
+{
+    char* c = v.get_str();
+    s << c;
+    free(c);
+    return s;
+}
 
 

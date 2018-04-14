@@ -842,3 +842,10 @@ mnode* Matrix::remove(mnode *p)
     delete p;
     return 0;
 }
+std::ostream& operator << (std::ostream& s,const Matrix &m)
+{
+    char* c = m.get_str();
+    s << c;
+    free(c);
+    return s;
+}

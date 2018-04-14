@@ -37,7 +37,8 @@ public:
     friend Vector operator +(const Rational_number, const Vector&);
     friend Vector operator -(const Rational_number, const Vector&);
     friend Vector operator *(const Rational_number, const Vector&);
-    friend Vector operator /(const Rational_number, const Vector&);
+    friend Vector operator /(const Rational_number, const Vector&);    
+    friend std::ostream& operator << (std::ostream&, const Vector&);
     friend char* to_string(const Vector&);
     char* get_str() const;
     char* get_true_str() const;

@@ -63,6 +63,7 @@ public:
     void write(const char*) const;
     Matrix insert_row(const Vector&, unsigned int);
     Matrix insert_column(const Vector&, unsigned int);
+    friend std::ostream& operator << (std::ostream&,const Matrix&);
 private:
     unsigned int length_x;
     unsigned int length_y;

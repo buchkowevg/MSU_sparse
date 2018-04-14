@@ -700,3 +700,10 @@ Rational_number round(const Rational_number obj)
     if(a.get_numinator() > (a.get_denuminator()/2)) return (1 - 2 * obj.get_sign()) * (obj.get_number_part() + 1);
     else return (1 - 2 * obj.get_sign()) * obj.get_number_part();
 }
+std::ostream& operator <<(std::ostream& s, Rational_number rat)
+{
+    char *c = rat.get_str();
+    s << c;
+    free(c);
+    return s;
+}
