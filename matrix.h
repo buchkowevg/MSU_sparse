@@ -3,6 +3,7 @@
 #include "matrix_coord.h"
 #include "rational_number.h"
 #include "vector.h"
+#include <stdlib.h> 
 struct mnode // структура для представления узлов дерева
 {
     Matrix_coord key;

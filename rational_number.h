@@ -3,6 +3,7 @@
 #include <inttypes.h>
 #include "mystring.h"
 #include <ostream>
+#include <stdlib.h> 
 
 class Rational_number
 {

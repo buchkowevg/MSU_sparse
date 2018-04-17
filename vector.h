@@ -1,6 +1,7 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 #include "rational_number.h"
+#include <stdlib.h> 
 struct node // структура для представления узлов дерева
 {
     int key;

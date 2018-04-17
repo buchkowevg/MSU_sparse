@@ -13,7 +13,7 @@ COMMON_SOURCES= mystring.cpp\
 COMMON_OBJS= $(patsubst %.cpp, %.o, $(COMMON_SOURCES))
 
 
-all: $(BINS)
+all: libsparse_matrix.a $(BINS)
 
 matrix_coord.cpp: matrix_coord_row_column.h
 my_exeptions.cpp: matrix_ex.h vector_ex.h rational_number_ex.h
@@ -27,6 +27,9 @@ sparse_generator: main_generator.o $(COMMON_OBJS)
 
 sparse_converter: main_converter.o $(COMMON_OBJS) 
 	$(CXX) -o $@ $(CXXFLAGS) $^
+
+libsparse_matrix.a:  $(COMMON_OBJS)
+	ar rvsc $@ $^
 
 %.o: %.cpp %.h
 	$(CXX) -c $(CXXFLAGS) $<
