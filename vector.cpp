@@ -261,13 +261,13 @@ Vector::Vector(const char* file_name)
         if(r == WAITING_FOR_ENDSHARPWOV || r == WAITING_FOR_VECTOR || r == READING_VECTOR)
             throw Vector_ex(V_NO_VECTOR, 0, 0 ,file_name);
     }
-    catch(Vector_ex* ex)
+    catch(const Vector_ex& ex)
     {
         tree = remove(tree);
         number_of_elements = 0;
         throw ex;
     }
-    catch(Rational_number_ex* ex)
+    catch(const Rational_number_ex& ex)
     {
         tree = remove(tree);
         number_of_elements = 0;

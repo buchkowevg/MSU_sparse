@@ -376,14 +376,14 @@ Matrix::Matrix(const char* file_name)
         if(r == WAITING_FOR_ENDSHARPWON || r == WAITING_FOR_NAME || r == READING_NAME)
             throw Matrix_ex(M_NO_MATRIX,0,0,file_name);
     }
-    catch(Matrix_ex* ex)
+    catch(const Matrix_ex& ex)
     {
         tree = remove(tree);
         length_x = 0;
         length_y = 0;
         throw ex;
     }
-    catch(Rational_number_ex* ex)
+    catch(const Rational_number_ex& ex)
     {
         tree = remove(tree);
         length_x = 0;

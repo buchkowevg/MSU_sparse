@@ -22,7 +22,7 @@ public:
     Vector(const char*);
     Vector(int);
     Vector(unsigned int);
-    Vector(unsigned int,const Rational_number);
+    Vector(unsigned int, const Rational_number);
     ~Vector();
     Vector& operator =(const Vector& obj);
     Rational_number& operator() (unsigned int);

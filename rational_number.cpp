@@ -217,6 +217,11 @@ void Rational_number::set(const char* str)
         }
         if(s[count] != '/') throw Rational_number_ex(R_BAD_STRING_FORMAT,0,0,s._getchararr());
         count++;
+        if(s[count] == '-')
+        {
+            sign = !sign;
+            count++;
+        }
         while(s[count] == ' ' && count < s.getlength()) count++;
         if(count == s.getlength()) throw Rational_number_ex(R_BAD_STRING_FORMAT,0,0,s._getchararr());
         denuminator = 0;
