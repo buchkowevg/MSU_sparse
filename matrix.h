@@ -48,6 +48,10 @@ public:
     friend Matrix operator + (const Matrix&, const Matrix&);
     friend Matrix operator - (const Matrix&, const Matrix&);
     friend Matrix operator * (const Matrix&, const Matrix&);
+    friend Matrix operator + (const Rational_number&, const Matrix&);
+    friend Matrix operator - (const Rational_number&, const Matrix&);
+    friend Matrix operator * (const Rational_number&, const Matrix&);
+    friend Matrix operator / (const Rational_number&, const Matrix&);
     friend char* to_string(const Matrix&);
     Matrix_support operator [](unsigned int i) const
     {
@@ -64,6 +68,7 @@ public:
     void write(const char*) const;
     Matrix insert_row(const Vector&, unsigned int);
     Matrix insert_column(const Vector&, unsigned int);
+    Matrix make_canonical();
     friend std::ostream& operator << (std::ostream&,const Matrix&);
 private:
     unsigned int length_x;

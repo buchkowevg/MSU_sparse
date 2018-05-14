@@ -28,6 +28,7 @@ public:
     Rational_number& operator() (unsigned int);
     Rational_number operator[] (unsigned int) const;
     Vector operator -() const;
+    Vector make_canonical();
     friend Vector operator +(const Vector&, const Vector&);
     friend Vector operator -(const Vector&, const Vector&);
     friend Rational_number operator *(const Vector&, const Vector&);
@@ -44,7 +45,7 @@ public:
     char* get_str() const;
     char* get_true_str() const;
     unsigned int get_number_of_elements() const;
-    void write(const char*) const;
+    void write(const char*, bool = 0) const;
 private:
     node* tree;
     unsigned int number_of_elements;

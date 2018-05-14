@@ -13,8 +13,7 @@ int main(int argc, char** argv)
 {
     try
     {
-        Matrix mat(3);
-        cout << to_string(mat[1][100]) << " " << to_string(mat[1][0]) << endl;
+        cout << Vector(3,Rational_number("1/2")) << endl;
     }
     catch(const Sparse_ex &ex)
     {

@@ -65,7 +65,15 @@ Rational_number::Rational_number(unsigned long long n)
 {
     set((unsigned long long)n);
 }
-
+Rational_number::Rational_number(double n, unsigned int power)
+{
+    int j = 10;
+    for(unsigned int i = 1; i < power; i++)
+        j *= j;
+    *this = (long long int)(n * j);
+    *this /= j;
+    make_canonical();
+}
 void Rational_number::set()
 {
     sign = 0;
@@ -164,7 +172,6 @@ void Rational_number::set(const char* s1, const char* s2)
             else sign = 1;
             count = 1;
         }
-        else sign = 0;
         denuminator = 0;
         while (count < str2.getlength() && (str2[count] >= '0' && str2[count] <= '9'))
         {
@@ -704,6 +711,24 @@ Rational_number round(const Rational_number obj)
     Rational_number a = obj.get_fraction_part();
     if(a.get_numinator() > (a.get_denuminator()/2)) return (1 - 2 * obj.get_sign()) * (obj.get_number_part() + 1);
     else return (1 - 2 * obj.get_sign()) * obj.get_number_part();
+}
+Rational_number Rational_number::operator ^(int power) const
+{
+    Rational_number res = 1;
+    Rational_number obj = *this;
+    unsigned int p;
+    if(power < 0)
+    {
+        obj = 1 / obj;
+        power = -power;
+    }
+    p = power;
+    for(unsigned int i = 0; i < p; i++)
+    {
+        res *= obj;
+        res.make_canonical();
+    }
+    return res;
 }
 std::ostream& operator <<(std::ostream& s, Rational_number rat)
 {

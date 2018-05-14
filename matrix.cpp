@@ -502,6 +502,15 @@ Matrix Matrix::insert_column(const Vector& obj, unsigned int column)
     }
     return *this;
 }
+Matrix Matrix::make_canonical()
+{
+    Rational_number res;
+    for(unsigned int i = 0; i < length_x; i++)
+        for(unsigned int j = 0; j < length_y; j++)
+            if((res = this->operator [](i)[j]) != 0)
+                this->operator ()(i, j) = res.make_canonical();
+    return *this;
+}
 Rational_number Matrix::operator [](Matrix_coord coord) const
 {
     if(coord.get_x() >= length_x || coord.get_y() >= length_y)
@@ -693,7 +702,92 @@ Matrix operator *(const Matrix& arg1, const Matrix& arg2)
         throw Matrix_ex(M_ALLOC_ERR);
     }
     return mat;
-
+}
+Matrix operator *(const Rational_number& arg1, const Matrix& arg2)
+{
+    Matrix mat(arg2.get_length_x(), arg2.get_length_y());
+    Rational_number rat;
+    try
+    {
+        for(unsigned int i = 0; i < arg2.get_length_x(); i++)
+            for(unsigned int j = 0; j < arg2.get_length_y(); j++)
+                if((rat = arg1 * mat[i][j]) != 0)
+                    mat(i ,j) = rat.make_canonical();
+    }
+    catch(Rational_number_ex *ex)
+    {
+        throw ex;
+    }
+    catch(...)
+    {
+        throw Matrix_ex(M_ALLOC_ERR);
+    }
+    return mat;
+}
+Matrix operator /(const Rational_number& arg1, const Matrix& arg2)
+{
+    Matrix mat(arg2.get_length_x(), arg2.get_length_y());
+    Rational_number rat;
+    try
+    {
+        for(unsigned int i = 0; i < arg2.get_length_x(); i++)
+            for(unsigned int j = 0; j < arg2.get_length_y(); j++)
+                if((rat = arg1 / mat[i][j]) != 0)
+                    mat(i ,j) = rat.make_canonical();
+    }
+    catch(Rational_number_ex *ex)
+    {
+        throw ex;
+    }
+    catch(...)
+    {
+        throw Matrix_ex(M_ALLOC_ERR);
+    }
+    return mat;
+}
+Matrix operator +(const Rational_number& arg1, const Matrix& arg2)
+{
+    Matrix mat(arg2.get_length_x(), arg2.get_length_y());
+    Rational_number rat;
+    try
+    {
+        for(unsigned int i = 0; i < arg2.get_length_x(); i++)
+            for(unsigned int j = 0; j < arg2.get_length_y(); j++)
+                if((rat = arg1 + mat[i][j]) != 0)
+                    mat(i ,j) = rat.make_canonical();
+    }
+    catch(Rational_number_ex *ex)
+    {
+        throw ex;
+    }
+    catch(...)
+    {
+        throw Matrix_ex(M_ALLOC_ERR);
+    }
+    return mat;
+}
+Matrix operator -(const Rational_number& arg1, const Matrix& arg2)
+{
+    Matrix mat(arg2.get_length_x(), arg2.get_length_y());
+    Rational_number rat;
+    try
+    {
+        for(unsigned int i = 0; i < arg2.get_length_x(); i++)
+            for(unsigned int j = 0; j < arg2.get_length_y(); j++)
+                if((rat = arg1 - mat[i][j]) != 0)
+                    mat(i ,j) = rat.make_canonical();
+                else
+                    mat.remove(mat.tree, Matrix_coord(i, j));
+    }
+    catch(Rational_number_ex *ex)
+    {
+        throw ex;
+    }
+    catch(...)
+    {
+        throw Matrix_ex(M_ALLOC_ERR);
+    }
+    return mat;
 }
 char* to_string(const Matrix& obj)
 {

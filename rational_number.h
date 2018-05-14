@@ -22,11 +22,13 @@ public:
     Rational_number(unsigned int n);
     Rational_number(unsigned long int n);
     Rational_number(unsigned long long int n);
+    Rational_number(double n, unsigned int power = 4);
     Rational_number& operator =(const Rational_number& obj);
     Rational_number& operator +=(const Rational_number& obj);
     Rational_number& operator -=(const Rational_number& obj);
     Rational_number& operator *=(const Rational_number& obj);
     Rational_number& operator /=(const Rational_number& obj);
+    Rational_number operator ^(int) const;
     Rational_number operator -() const;
     Rational_number &operator ++();
     Rational_number operator ++(int);

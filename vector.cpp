@@ -525,11 +525,14 @@ char* to_string(const Vector &obj1)
 {
     return obj1.get_str();
 }
-void Vector::write(const char *filename) const
+void Vector::write(const char *filename, bool rot) const
 {
     ofstream myfile;
     char* s;
+    char c = '\n';
     Rational_number rat;
+    if(rot)
+        c = ' ';
     myfile.open(filename);
     if(myfile.is_open())
     {
@@ -539,7 +542,7 @@ void Vector::write(const char *filename) const
             if((rat = get_elem(tree, i)) != 0)
             {
                 s = rat.get_str();
-                myfile << i + 1 << ' ' << s << '\n';
+                myfile << i + 1 << ' ' << s << c;
                 free(s);
             }
         }
@@ -668,6 +671,14 @@ node* Vector::remove(node *p)
     if(p->left != NULL) remove(p->left);
     delete p;
     return NULL;
+}
+Vector Vector::make_canonical()
+{
+    Rational_number rat;
+    for(unsigned int i = 0; i < number_of_elements; i++)
+        if((rat = this->operator [](i)) != 0)
+            this->operator ()(i) = rat.make_canonical();
+    return *this;
 }
 std::ostream& operator << (std::ostream& s, const Vector &v)
 {
