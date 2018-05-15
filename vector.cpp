@@ -82,7 +82,8 @@ Vector::Vector(const char* file_name)
     tree = NULL;
     char *s = NULL;
     char c;
-    char buf[5];
+    char buf[6];
+    buf[5] = '\0';
     int r = WAITING_FOR_VECTOR;
     int count = 4;
     unsigned int elem_n = 0;
